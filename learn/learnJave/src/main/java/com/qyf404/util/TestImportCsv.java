@@ -4,18 +4,20 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.math.RandomUtils;
 
 public class TestImportCsv {
@@ -66,8 +68,56 @@ public class TestImportCsv {
 		return listFile;
 	}
 
+	private String getStr(String str) throws Exception{
+		str = str.trim();
+		if ("无".equals(str)) {
+			str = "";
+		} else if ("".equals(str)) {
+			str = "";
+		} else {
+			try{
+			int tempInt = Integer. valueOf(str);
+			
+			if (tempInt == 0) {
+				str = "";
+			}
+			}catch(Exception e){
+				throw e;
+			}
+		}
+		return str;
+	}
+	
+	private String getKey(List<String> rowList){
+		String str2;
+		try {
+			str2 = getStr(rowList.get(2));
+		} catch (Exception e) {
+			str2 = rowList.get(2);
+		}
+		
+		String str3;
+		try {
+			str3 = getStr(rowList.get(3));
+		} catch (Exception e) {
+			str3 = rowList.get(3);
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(rowList.get(0)).append("_")
+			.append(rowList.get(1)).append("_")
+		
+			.append(str2).append("_")
+			.append(str3).append("_");
+		return sb.toString();
+		
+	}
+
 	public void writeCsv(List<List<String>> csvList, String path)
 			throws IOException {
+		
+		Set<String> keySet = new HashSet<String>();
+		
 		File outFile = new File(path);
 
 		FileOutputStream fos = new FileOutputStream(outFile);
@@ -79,9 +129,38 @@ public class TestImportCsv {
 			// "1","20011","90","","","20011","SP_SRVTYPE","receivableInformationCosts * (1 - badDebtRate) * settlementProportion;","0.008","0.7","","","","",""
 			int k = 0;
 			for (List<String> rowList : csvList) {
-
+				if(k ==0 ){
+					k++;
+					continue;
+				}
+				
+				
+				String key = getKey(rowList);
+				if(keySet.contains(key)){
+					continue;
+				}else{
+					keySet.add(key);
+				}
+				
+				
+				
 				for (int i = 0; i < rowList.size(); i++) {
 					String str = rowList.get(i);
+
+					if (i == 2) {
+						try {
+							str = getStr(str);
+						} catch (Exception e) {
+//							System.out.println("类型转换失败,不是0000,第" + k + "行");
+						}
+					} else if (i == 3) {
+						try {
+							str = getStr(str);
+						} catch (Exception e) {
+//							System.out.println("类型转换失败,不是0000,第" + k + "行");
+						}
+					}
+
 					bw.write("\"");
 					bw.write(str);
 					bw.write("\",");
@@ -92,7 +171,7 @@ public class TestImportCsv {
 
 				int jinge = RandomUtils.nextInt(100) * 10000;
 				bw.write("\"" + jinge + "\",");
-				
+
 				int a;
 				do {
 					a = RandomUtils.nextInt(10);
@@ -102,13 +181,13 @@ public class TestImportCsv {
 				int b = 10 - a;
 				b = RandomUtils.nextInt(b) + a;
 				bw.write("\"0." + b + "\"");
-				
-				
+
 				k++;
 				if (k < csvList.size()) {
 					bw.write("\n");
 				}
 			}
+			System.out.println("成功转换" + k + "行数据");
 		} finally {
 			bw.close();
 		}
@@ -116,6 +195,9 @@ public class TestImportCsv {
 
 	public void writeCsv2(List<List<String>> csvList, String path)
 			throws IOException {
+		
+		Set<String> keySet = new HashSet<String>();
+		
 		File outFile = new File(path);
 
 		FileOutputStream fos = new FileOutputStream(outFile);
@@ -127,14 +209,47 @@ public class TestImportCsv {
 			// "1","20011","90","","","20011","SP_SRVTYPE","receivableInformationCosts * (1 - badDebtRate) * settlementProportion;","0.008","0.7","","","","",""
 			int k = 0;
 			for (List<String> rowList : csvList) {
-
+				if(k ==0 ){
+					k++;
+					continue;
+				}
+				
+				String key = getKey(rowList);
+				if(keySet.contains(key)){
+					System.out.println("发现重复数据,第"+k+"行");
+					System.out.println(Arrays.toString(rowList.toArray()));
+					k++;
+					continue;
+				}else{
+					keySet.add(key);
+				}
+				
+				boolean flag = false;
 				for (int i = 0; i < rowList.size(); i++) {
 					String str = rowList.get(i);
+					if (i == 2) {
+						try {
+							str = getStr(str);
+						} catch (Exception e) {
+							System.out.println("类型转换失败,不是0000,第" + k + "行");
+							flag = true;
+						}
+					} else if (i == 3) {
+						try {
+							str = getStr(str);
+						} catch (Exception e) {
+							System.out.println("类型转换失败,不是0000,第" + k + "行");
+							flag = true;
+						}
+					}
+					
 					bw.write("\"");
 					bw.write(str);
 					bw.write("\",");
 				}
-
+				if(flag){
+					System.out.println(Arrays.toString(rowList.toArray()));
+				}
 
 				int xiaoshu = RandomUtils.nextInt(100);
 				int zhegnshu = RandomUtils.nextInt(100000);
@@ -156,7 +271,7 @@ public class TestImportCsv {
 		TestImportCsv test = new TestImportCsv("/Users/qyfmac/temp/test2.csv");
 		List<List<String>> csvList = test.readCSVFile();
 		test.writeCsv(csvList, "/Users/qyfmac/temp/guize.csv");
-		test.writeCsv2(csvList, "/Users/qyfmac/temp/tiaozheng.csv");
+		test.writeCsv2(csvList, "/Users/qyfmac/temp/tiaozhang.csv");
 	}
 
 }

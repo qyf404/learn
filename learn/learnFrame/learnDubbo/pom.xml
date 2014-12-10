@@ -1,18 +1,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.qyf404</groupId>
-  <artifactId>learn-java</artifactId>
+  <artifactId>learn-dubbo</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
   <dependencies>
-  <dependency>
-  	<groupId>commons-lang</groupId>
-  	<artifactId>commons-lang</artifactId>
-  	<version>2.6</version>
-  </dependency>
-  <dependency>
-  	<groupId>commons-collections</groupId>
-  	<artifactId>commons-collections</artifactId>
-  	<version>3.2.1</version>
-  </dependency>
+  	
   </dependencies>
+  <dependencyManagement>
+  <dependencies>
+          <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>2.5.3</version>
+        </dependency>
+  
+  </dependencies>
+  </dependencyManagement>
 </project>
