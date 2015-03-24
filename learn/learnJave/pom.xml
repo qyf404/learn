@@ -14,5 +14,15 @@
   	<artifactId>commons-collections</artifactId>
   	<version>3.2.1</version>
   </dependency>
+  <dependency>
+  	<groupId>org.aspectj</groupId>
+  	<artifactId>aspectjrt</artifactId>
+  	<version>1.8.5</version>
+  </dependency>
+  <dependency>
+  	<groupId>org.aspectj</groupId>
+  	<artifactId>aspectjweaver</artifactId>
+  	<version>1.8.5</version>
+  </dependency>
   </dependencies>
 </project>
