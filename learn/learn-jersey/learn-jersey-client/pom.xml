@@ -1,10 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.qyf404</groupId>
-  <artifactId>learn-parent</artifactId>
-  <version>1.0.0</version>
-  <packaging>pom</packaging>
-  <modules>
-  <module>learn-alipay</module>
-  </modules>
+  <parent>
+    <groupId>com.qyf404</groupId>
+    <artifactId>learn-jersey</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <artifactId>learn-jersey-client</artifactId>
 </project>
