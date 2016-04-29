@@ -5,6 +5,6 @@
   <version>1.0.0</version>
   <packaging>pom</packaging>
   <modules>
-  <module>learn-alipay</module>
+
   </modules>
 </project>
