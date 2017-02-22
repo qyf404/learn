@@ -70,7 +70,8 @@ public class SampleAkka {
         final Source<BigInteger, NotUsed> factorials =
                 source.scan(BigInteger.ONE, (acc, next) -> acc.multiply(BigInteger.valueOf(next)));
 
-        factorials.map(BigInteger::toString).runWith(lineSink("factorial2.txt"), materializer);
+        final CompletionStage<IOResult> result =
+                factorials.map(BigInteger::toString).runWith(lineSink("factorial2.txt"), materializer);
 
     }
 
