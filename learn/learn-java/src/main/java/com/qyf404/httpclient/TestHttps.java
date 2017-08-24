@@ -14,7 +14,7 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.util.EntityUtils;
 
-public class TespHttps {
+public class TestHttps {
 	public static void main(String[] args) throws ClientProtocolException, IOException {
 		
 		HttpParams params = new BasicHttpParams();
