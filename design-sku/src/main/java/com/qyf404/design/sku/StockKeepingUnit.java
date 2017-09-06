@@ -1,4 +1,4 @@
-package com.qyf404.design.sku.core;
+package com.qyf404.design.sku;
 
 import java.util.Set;
 

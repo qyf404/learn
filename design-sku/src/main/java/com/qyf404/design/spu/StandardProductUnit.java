@@ -1,7 +1,7 @@
 package com.qyf404.design.spu;
 
-import com.qyf404.design.sku.core.AttributeValue;
-import com.qyf404.design.sku.core.Goods;
+import com.qyf404.design.sku.AttributeValue;
+import com.qyf404.design.sku.Goods;
 
 import java.util.Set;
 
