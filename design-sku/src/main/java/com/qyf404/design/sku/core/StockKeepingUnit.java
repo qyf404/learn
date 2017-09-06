@@ -2,7 +2,7 @@ package com.qyf404.design.sku.core;
 
 import java.util.Set;
 
-public class Product {
+public class StockKeepingUnit {
     private Long id;
     private String code;
     private String name;

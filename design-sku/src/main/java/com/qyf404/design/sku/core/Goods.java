@@ -6,5 +6,5 @@ public class Goods {
     private Long id;
     private String name;
     private String description;
-    private Set<Product> products;
+    private Set<StockKeepingUnit> stockKeepingUnits;
 }
