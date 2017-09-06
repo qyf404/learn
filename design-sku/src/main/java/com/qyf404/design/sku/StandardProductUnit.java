@@ -1,7 +1,4 @@
-package com.qyf404.design.spu;
-
-import com.qyf404.design.sku.AttributeValue;
-import com.qyf404.design.sku.Goods;
+package com.qyf404.design.sku;
 
 import java.util.Set;
 
