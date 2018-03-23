@@ -61,7 +61,7 @@ public class Velocity2Test {
         context.put("conditionName", "create_time");
         context.put("conditionValue", "2018-01-01");
 
-        String template = "select * from t_user where create_time = 2018-01-01;";
+        String template = "select * from $tableName where $conditionName = $conditionValue;";
         StringWriter sw = new StringWriter();
         Velocity.evaluate(context, sw, "sql", template);
 
