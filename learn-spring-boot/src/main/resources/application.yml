@@ -1,0 +1,7 @@
+spring:
+  rabbitmq:
+    host: mq-test02.sinnet.huobiidc.com
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: "/"
