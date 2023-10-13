@@ -22,9 +22,9 @@ public class Application {
             SpringApplication.run(Application.class, args);
     }
 
-    static final String topicExchangeName = "rc-aml-test-6";
+    static final String topicExchangeName = "test-6";
 
-    static final String queueName = "aml-uid-D257D9B6F5-test-6";
+    static final String queueName = "test-6";
 
     @Bean
     Queue queue() {
